@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/ssmall/Documents/workspace/test1/src/main/java'
+let g:netrw_dirhist_2='/Users/ssmall/Documents/workspace/test1/src/main/java/test'
+let g:netrw_dirhist_3='/Users/ssmall/Documents/workspace/test1'
+let g:netrw_dirhist_4='/Users/ssmall/Documents/workspace/test1/src'
+let g:netrw_dirhist_5='/Users/ssmall/Documents/workspace/test1'
+let g:netrw_dirhist_6='/Users/ssmall/.config/fish'
