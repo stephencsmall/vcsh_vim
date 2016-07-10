@@ -5,33 +5,44 @@ set fileencoding=utf-8
 
 set backspace=indent,eol,start
 
-colorscheme molokai
+set t_Co=256
+colorscheme Tomorrow-Night-Bright
+
+"let g:rehash256 = 1
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 set shell=/bin/sh
 
 " enable syntax highlighting
 syntax on
 
-set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h11
+set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h12
 
-let g:pymode_lint_options_pep8 = {'ignore': 'E501'}
+"let g:pymode_lint_options_pep8 = {'ignore': 'E501'}
 
 " easier window nav
 nnoremap <tab> <c-w>
 nnoremap <tab><tab> <c-w><c-w>
 
 " Tagbar toggle
-"nmap <Leader>m :TagbarToggle<CR>
+nmap <Leader>m :TagbarToggle<CR>
 
+" Nerdtree toggle
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+" Undotree toggle
 nmap <Leader>u :UndotreeToggle<CR>
+
 " enable indentation plugin
 filetype on
 filetype plugin indent on
 
-let g:airline_theme = 'molokai'
-let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
+let g:airline_theme = 'tomorrow'
+let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh.vim"
 let g:airline_powerline_fonts = 1 " dat powerline font jumble...
-let g:airline#extensions#tmuxline#enabled = 1 " keep me from fucking up tmuxline
+let g:airline#extensions#tmuxline#enabled = 0 " keep me from fucking up tmuxline
 let g:airline#extensions#tabline#enabled = 1 " Enable the sweet tabline
 let g:airline#extensions#tabline#show_tab_type = 1 " show buffer type in tabline
 let g:airline#extensions#tabline#buffer_idx_mode = 1 " show buffer index in tabline
@@ -53,23 +64,23 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 " Promptline specifications
 let g:promptline_theme = 'airline'
 let g:promptline_preset = {
-	\'b'    : [ '$USER' ],
-	\'c'    : [ promptline#slices#cwd({ 'dir_limit': 2 }) ],
-	\'warn' : [ promptline#slices#last_exit_code() ],
-	\'y'	: [ promptline#slices#vcs_branch(), '$(git rev-parse --short HEAD 2>/dev/null)' ],
-	\'x'	: [ promptline#slices#git_status() ],
-	\'z'	: [ '%m']}
+    \'b'    : [ '$USER' ],
+    \'c'    : [ promptline#slices#cwd({ 'dir_limit': 2 }) ],
+    \'warn' : [ promptline#slices#last_exit_code() ],
+    \'y'    : [ promptline#slices#vcs_branch(), '$(git rev-parse --short HEAD 2>/dev/null)' ],
+    \'x'    : [ promptline#slices#git_status() ],
+    \'z'    : [ '%m']}
 
 " Tmuxline specifications
 let g:tmuxline_preset = {
-	\'a'    : '#S',
-	\'b'    : '#(whoami)',
-	\'c'    : ['#W'],
-	\'win'  : ['#I', '#W'],
-	\'cwin' : ['#I', '#W'],
-	\'x'    : '%a',
-	\'y'    :  '%R',
-	\'z'    : '#h'}
+    \'a'    : '#S',
+    \'b'    : '#(whoami)',
+    \'c'    : ['#W'],
+    \'win'  : ['#I', '#W'],
+    \'cwin' : ['#I'],
+    \'x'    : '%a',
+    \'y'    :  '%R',
+    \'z'    : '#h'}
 
 " Indentation guide customization
 let g:indentLine_color_term = 239
@@ -95,20 +106,13 @@ set tabstop=4 softtabstop=4 shiftwidth=4
 set list listchars=tab:❘-,trail:·,extends:»,precedes:«,nbsp:×
 
 " convert spaces to tabs when reading file
-" autocmd! bufreadpost * set noexpandtab | retab! 4
+autocmd! bufreadpost * set noexpandtab | retab! 4
 
 " convert tabs to spaces before writing file
-"autocmd! bufwritepre * set expandtab | retab! 4
+autocmd! bufwritepre * set expandtab | retab! 4
 
 " convert spaces to tabs after writing file (to show guides again)
-"autocmd! bufwritepost * set noexpandtab | retab! 4
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-set term=screen-256color
-
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+autocmd! bufwritepost * set noexpandtab | retab! 4
 
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
@@ -118,3 +122,21 @@ let g:pymode_folding = 1
 let g:pymode_motion = 1
 
 let g:pandoc_syntax_conceal_use = 0
+
+set display=lastline
+
+set foldmethod=syntax
+set foldlevelstart=1
+
+let javaScript_fold=1         " JavaScript
+let perl_fold=1               " Perl
+let php_folding=1             " PHP
+let r_syntax_folding=1        " R
+let ruby_fold=1               " Ruby
+let sh_fold_enabled=1         " sh
+let vimsyn_folding='af'       " Vim script
+let xml_syntax_folding=1      " XML
+
+" Begin vim-geeknote
+
+noremap <Leader>g :Geeknote<cr>
